@@ -1,23 +1,23 @@
 #include <stdio.h>
 
+int CalcularDanoDeAtaque(int atkFisJ, int resI, int danoExtraJ, int redDanoI)
+{ 
+  int danoCausado;
+  danoCausado = atkFisJ - ((double)atkFisJ/100 * resI);
+  danoCausado = danoCausado + danoExtraJ - redDanoI;
+  if (danoCausado < 0) danoCausado = 0;
+  
+  return danoCausado;  
+}
+
 int main(void) {
   int vidaJ, resistenciaJ, manaJ, ataqueFisicoJ, ataqueMagicoJ;
   int danoAdicionalJ, reducaoDeDanoI;
   int danoCausadoJ;
 
+danoCausadoJ = CalcularDanoDeAtaque(10,10,2,3);
 
 
-
-  printf("Hello World\n");
+  printf("%i Hello World\n", danoCausadoJ);
   return 0;
-}
-
-int CalcularDanoDeAtaque(int atkFisJ, int resI, int danoExtraJ, int redDanoI)
-{ 
-  int danoCausado;
-  danoCausado = atkFisJ - ((atkFisJ/100) * resI);
-  danoCausado = danoCausado + danoExtraJ - redDanoI;
-  if (danoCausado < 0) danoCausado = 0;
-  
-  return danoCausado;  
 }
