@@ -10,14 +10,46 @@ int CalcularDanoDeAtaque(int atkFisJ, int resI, int danoExtraJ, int redDanoI)
   return danoCausado;  
 }
 
+int CalcularDanoDeAtaqueMagico(int atkMagJ, int resI, int danoExtraJ, int redDanoI)
+{
+  int danoCausado;
+  danoCausado = atkMagJ - ((double)atkMagJ/100 * resI);
+  danoCausado = danoCausado + danoExtraJ - redDanoI;
+  if (danoCausado < 0) danoCausado = 0;
+  
+  return danoCausado;  
+}
+
 int main(void) {
-  int vidaJ, resistenciaJ, manaJ, ataqueFisicoJ, ataqueMagicoJ;
-  int danoAdicionalJ, reducaoDeDanoI;
+  int vidaJ = 20;
+  int vidaI = 20;
+  int ataqueFisicoJ = 10;
+  int danoAdicionalJ = 2; 
+  int reducaoDeDanoI = 3;
+  int resistenciaI = 10;
+  int resistenciaJ, manaJ, ataqueMagicoJ;
   int danoCausadoJ;
+  int entradaUsuario;
+  int danoCausadoI;
 
-danoCausadoJ = CalcularDanoDeAtaque(10,10,2,3);
 
 
-  printf("%i Hello World\n", danoCausadoJ);
+  printf("Sua vida: %i\nSeu ataque fisico: %i\nDano extra de itens: %i\nReducao de dano do Inimigo %i\n", vidaJ, ataqueFisicoJ, danoAdicionalJ, reducaoDeDanoI);
+  printf("[1] Atacar\n[2] Sair do jogo\n");
+  scanf("%i", &entradaUsuario);
+  if(entradaUsuario ==1)
+    danoCausadoI = CalcularDanoDeAtaque(ataqueFisicoJ, resistenciaI, danoAdicionalJ, reducaoDeDanoI);
+  if(entradaUsuario ==2)
+    return 0;
+  while(entradaUsuario != 1 && entradaUsuario !=2)
+  {
+    printf("Comando invalido, digite novamente\n");
+    printf("[1] Atacar\n[2]Sair do jogo\n");
+    scanf("%i", &entradaUsuario);
+  }
+  printf("vida do inimigo : %i\n", vidaI);
+  vidaI = vidaI - danoCausadoI;
+  printf("Dano Causado : %i\n", danoCausadoI);
+  printf("vida do inimigo : %i\n", vidaI);
   return 0;
 }
