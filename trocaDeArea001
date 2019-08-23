@@ -1,0 +1,195 @@
+#include <stdio.h>
+
+int CalcularDanoDeAtaqueFisico(int atkFisJ, int resFisI, int danoExtraFisJ, int redDanoFisI)
+{ 
+  int danoCausado;
+  danoCausado = atkFisJ - ((double)atkFisJ/100 * resFisI);
+  danoCausado = danoCausado + danoExtraFisJ - redDanoFisI;
+  if (danoCausado < 0) danoCausado = 0;  
+  return danoCausado;  
+}
+
+int CalcularDanoDeAtaqueMagico(int atkMagJ, int resMagI, int danoExtraMagJ, int redDanoMagI)
+{ 
+  int danoCausado;
+  danoCausado = atkMagJ - ((double)atkMagJ/100 * resMagI);
+  danoCausado = danoCausado + danoExtraMagJ - redDanoMagI;
+  if (danoCausado < 0) danoCausado = 0;  
+  return danoCausado;  
+}
+
+int MelhorarAtributos(int pontosDisponiveis, int atributosJogador[])
+{
+/* 
+atributosJogador[0] == Vitalidade
+atributosJogador[1] == Força
+atributosJogador[3] == Inteligencia
+atributosJogador[4] == Destreza
+atributosJogador[5] == Sorte
+atributosJogador[6] == Percepção
+*/
+return 0;
+}
+
+
+int ChamarArea(int area)
+{
+  int areaDeViagem;
+  int entradaJogador;
+  switch (area){
+  case 1: //Prologo 1-1   //Calabouço
+    printf("Teste de erro funcao ChamarArea! (voce esta' na area 1)(PASSOU).\n");
+    printf("Voce esta no Calabouco!\n");
+    printf("Para onde voce deseja ir?\n");
+    printf("[1] Floresta\n");
+    printf("[2] Fonte\n");
+    printf("[3] Cidadela\n");
+
+    scanf("%i", &entradaJogador);
+    
+    do
+    {
+      switch (entradaJogador)
+      {
+        case 1: 
+          areaDeViagem = 4;
+          ChamarArea(areaDeViagem);
+        case 2: 
+          areaDeViagem = 2;
+          ChamarArea(areaDeViagem);
+        case 3: 
+          areaDeViagem = 3;
+          ChamarArea(areaDeViagem);
+        default:
+        printf("Comando invalido, digite o comando  desejado novamente.\n");
+        scanf("%i", &entradaJogador);
+      }
+    }while(areaDeViagem!=4 && areaDeViagem!=2 && areaDeViagem!=3);
+ 
+  case 2: //Prologo 1-2   //Fonte
+    printf("Teste de erro funcao ChamarArea! (voce esta' na area 2)(PASSOU).\n");
+    printf("Voce esta na Fonte!\n");
+    printf("Para onde voce deseja ir?\n");
+    printf("[1] Calabouco\n");
+    printf("[2] Cidadela\n");
+    printf("[3] Floresta\n");
+
+    scanf("%i", &entradaJogador);
+    
+    do
+    {
+      switch (entradaJogador)
+      {
+        case 1: 
+          areaDeViagem = 1;
+          ChamarArea(areaDeViagem);
+        case 2: 
+          areaDeViagem = 3;
+          ChamarArea(areaDeViagem);
+        case 3: 
+          areaDeViagem = 4;
+          ChamarArea(areaDeViagem);
+        default:
+        printf("Comando invalido, digite o comando  desejado novamente.\n");
+        scanf("%i", &entradaJogador);
+      }
+    }while(areaDeViagem!=1 && areaDeViagem!=3 && areaDeViagem!=4);
+
+
+  case 3: //Prologo 1-3   //Cidadela
+    printf("Teste de erro funcao ChamarArea! (voce esta' na area 3)(PASSOU).\n");
+    printf("Voce esta na Cidadela!\n");
+    printf("Para onde voce deseja ir?\n");
+    printf("[1] Calabouco\n");
+    printf("[2] Floresta\n");
+    printf("[3] Fonte\n");
+
+    scanf("%i", &entradaJogador);
+    
+    do
+    {
+      switch (entradaJogador)
+      {
+        case 1: 
+          areaDeViagem = 1;
+          ChamarArea(areaDeViagem);
+        case 2: 
+          areaDeViagem = 4;
+          ChamarArea(areaDeViagem);
+        case 3: 
+          areaDeViagem = 2;
+          ChamarArea(areaDeViagem);
+        default:
+        printf("Comando invalido, digite o comando  desejado novamente.\n");
+        scanf("%i", &entradaJogador);
+      }
+    }while(areaDeViagem!=1 && areaDeViagem!=4 && areaDeViagem!=2);
+
+
+  case 4: //Prologo 1-4   //Floresta
+    printf("Teste de erro funcao ChamarArea! (voce esta' na area 4)(PASSOU).\n");
+    printf("Voce esta na floresta!\n");
+    printf("Para onde voce deseja ir?\n");
+    printf("[1] Calabouco\n");
+    printf("[2] Cidadela\n");
+    printf("[3] Fonte\n");
+
+    scanf("%i", &entradaJogador);
+
+    do
+    {
+      switch (entradaJogador)
+      {
+        case 1: 
+          areaDeViagem = 1;
+          ChamarArea(areaDeViagem);
+        case 2: 
+          areaDeViagem = 3;
+          ChamarArea(areaDeViagem);
+        case 3: 
+          areaDeViagem = 2;
+          ChamarArea(areaDeViagem);
+        default:
+        printf("Comando invalido, digite o comando  desejado novamente.\n");
+        scanf("%i", &entradaJogador);
+      }
+    }while(areaDeViagem!=1 && areaDeViagem!=3 && areaDeViagem!=2);
+
+  default: 
+    printf("AComando invalido, digite o comando desejado novamente.\n");
+    ChamarArea(areaDeViagem);
+  }
+}
+
+
+int main()
+{
+char nomeJogador[15];
+int atributosJogador[6];
+int vidaJogador = 100;
+int manaJogador = 20;
+int armaduraJogador = 5;
+int resistenciaMagicaJogador = 20;
+int ataqueFisicoJogador = 10;
+int ataqueMagicoJogador = 20;
+int danoFisDeItensJogador = 0;
+int danoMagDeItensJogador = 0;
+
+int vidaInimigo=0;
+int manaInimigo=0;
+int armaduraInimigo=0;
+int resistenciaMagicaInimigo=0;
+int ataqueFisicoInimigo=0;
+int ataqueMagicoInimigo=0;
+int danoDeItensInimigo=0;
+
+int levelAtualJogador=1;
+int experienciaAtualJogador=0;
+
+int areaDeViagem=0;
+
+
+printf("Teste de erro! funcao Main (PASSOU)\n");
+ChamarArea(1);
+return 0;
+}
