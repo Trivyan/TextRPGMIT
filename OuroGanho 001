@@ -206,18 +206,23 @@ int MelhorarAtributos(int atributosJogador[], int areaAtualJogador)
 
 int GanharOuro(int levelInimigo, int raridadeInimio, double bonusDeOuroDeItens)
 {
-  int ouroGanho;
-  int bonusLevelInimigo;
-  int bonusRaridadeInimigo;
-  int bonusDeOuro;
+  double ouroGanho;
+  double bonusLevelInimigo;
+  double bonusRaridadeInimigo;
+  double bonusDeOuro;
 
   ouroGanho = 1 + rand() % 10;
+  printf("Você ganhou : %lf de ouro. OURO BASE\n", ouroGanho);
   bonusLevelInimigo = levelInimigo / 5;
   bonusRaridadeInimigo = raridadeInimio / 2;
   ouroGanho = ouroGanho + (ouroGanho * bonusLevelInimigo);
+  printf("Você ganhou : %lf de ouro. OURO COM BONUS DE LEVEL\n", ouroGanho);
   ouroGanho = ouroGanho + (ouroGanho * bonusRaridadeInimigo);
+  printf("Você ganhou : %lf de ouro. OURO COM BONUS DE RARIDADE\n", ouroGanho);
   bonusDeOuro = ((double)ouroGanho/100) * bonusDeOuroDeItens;
   ouroGanho = ouroGanho + bonusDeOuro;
+
+  printf("Você ganhou : %lf de ouro.OURO COM BONUS DE ITENS\n", ouroGanho);
 
   return ouroGanho;
 }
@@ -258,11 +263,13 @@ int experienciaAtualJogador=0;
 
 int areaDeViagem=0;
 
+srand(time(NULL));
+GanharOuro(3, 3, 20);
 inicio:
 printf("Teste de erro! função Main (PASSOU)\n");
 MelhorarAtributos(atributosJogador, 1);
 ChamarArea(1);
 
-//srand(time(NULL));
+
 return 0;
 }
