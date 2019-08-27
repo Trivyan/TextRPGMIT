@@ -204,6 +204,24 @@ int MelhorarAtributos(int atributosJogador[], int areaAtualJogador)
 }
 
 
+int GanharOuro(int levelInimigo, int raridadeInimio, double bonusDeOuroDeItens)
+{
+  int ouroGanho;
+  int bonusLevelInimigo;
+  int bonusRaridadeInimigo;
+  int bonusDeOuro;
+
+  ouroGanho = 1 + rand() % 10;
+  bonusLevelInimigo = levelInimigo / 5;
+  bonusRaridadeInimigo = raridadeInimio / 2;
+  ouroGanho = ouroGanho + (ouroGanho * bonusLevelInimigo);
+  ouroGanho = ouroGanho + (ouroGanho * bonusRaridadeInimigo);
+  bonusDeOuro = ((double)ouroGanho/100) * bonusDeOuroDeItens;
+  ouroGanho = ouroGanho + bonusDeOuro;
+
+  return ouroGanho;
+}
+
 int main()
 {
 setlocale(LC_ALL, "Portuguese");
