@@ -167,7 +167,7 @@ int MelhorarAtributos(int atributosJogador[], int areaAtualJogador)
   atributosJogador[6] == Percepção
   atributosJogador[7] == PontosDeAtributoRestantes
   */
-  printf("\n--------------------------------------------\n");
+
   printf("Seus Atributos:\n");
   printf("Pontos de atributo restantes: %i\n", atributosJogador[9]);
   printf("[1] Vitalidade    = %i\n" , atributosJogador[1]);
@@ -197,7 +197,7 @@ int MelhorarAtributos(int atributosJogador[], int areaAtualJogador)
   {
     printf("\nComando inválido\n");
   }
-
+  printf("---------------------------------------------------------\n\n");
   MelhorarAtributos(atributosJogador, areaAtualJogador);
 
   return 0;
@@ -213,8 +213,8 @@ int GanharOuro(int levelInimigo, int raridadeInimio, double bonusDeOuroDeItens)
 
   ouroGanho = 1 + rand() % 10;
   printf("Você ganhou : %lf de ouro. OURO BASE\n", ouroGanho);
-  bonusLevelInimigo = levelInimigo / 5;
-  bonusRaridadeInimigo = raridadeInimio / 2;
+  bonusLevelInimigo = (double)levelInimigo / 5;
+  bonusRaridadeInimigo = (double)raridadeInimio / 2;
   ouroGanho = ouroGanho + (ouroGanho * bonusLevelInimigo);
   printf("Você ganhou : %lf de ouro. OURO COM BONUS DE LEVEL\n", ouroGanho);
   ouroGanho = ouroGanho + (ouroGanho * bonusRaridadeInimigo);
@@ -223,15 +223,45 @@ int GanharOuro(int levelInimigo, int raridadeInimio, double bonusDeOuroDeItens)
   ouroGanho = ouroGanho + bonusDeOuro;
 
   printf("Você ganhou : %lf de ouro.OURO COM BONUS DE ITENS\n", ouroGanho);
+  printf("Você ganhou : %0.lf de ouro.\n", ouroGanho);
+
+    printf("---------------------------------------------------------\n\n");
 
   return ouroGanho;
+}
+
+int GanharExperiencia(int levelInimigo, int raridadeInimio, double bonusDeExpDeItens )
+{
+  double ExpGanha=0;
+  double bonusLevelInimigo;
+  double bonusRaridadeInimigo;
+  double bonusDeExp;
+  while(ExpGanha < 50)
+  {
+  ExpGanha = 1 + rand() % 100;
+  }
+  printf("Você ganhou : %lf de experiência. EXP\n", ExpGanha);
+  bonusLevelInimigo = (double)levelInimigo / 5;
+  bonusRaridadeInimigo = (double)raridadeInimio / 2;
+  ExpGanha = ExpGanha + (ExpGanha * bonusLevelInimigo);
+  printf("Você ganhou : %lf de experiência. XP COM BONUS DE LEVEL\n", ExpGanha);
+  ExpGanha = ExpGanha + (ExpGanha * bonusRaridadeInimigo);
+  printf("Você ganhou : %lf de experiência. XP COM BONUS DE RARIDADE\n", ExpGanha);
+  bonusDeExp = ((double)ExpGanha/100) * bonusDeExpDeItens;
+  ExpGanha = ExpGanha + bonusDeExp;
+
+  printf("Você ganhou : %lf de experiência.XP COM BONUS DE ITENS\n", ExpGanha);
+  printf("Você ganhou : %0.lf de experiência.\n", ExpGanha);
+
+  printf("---------------------------------------------------------\n\n");
+
 }
 
 int main()
 {
 setlocale(LC_ALL, "Portuguese");
 char nomeJogador[15];
-int atributosJogador[10]={10,10,10,10,10,10,10,10,10,5};
+int atributosJogador[10]={10,10,10,10,10,10,10,10,10,20};
 int vidaAtualJogador = 100;
 int manaAtualJogador = 20;
 int armaduraAtualJogador = 5;
@@ -265,6 +295,7 @@ int areaDeViagem=0;
 
 srand(time(NULL));
 GanharOuro(3, 3, 20);
+GanharExperiencia(3, 3, 10);
 inicio:
 printf("Teste de erro! função Main (PASSOU)\n");
 MelhorarAtributos(atributosJogador, 1);
