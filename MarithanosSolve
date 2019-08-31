@@ -1,0 +1,34 @@
+#include <stdio.h>
+#include <string.h>
+
+int LimparBuffer(char charr[], int tamanhoCharr)
+{
+	fgets(charr, tamanhoCharr, stdin);
+	if(strlen(charr) < tamanhoCharr-1)
+	{
+		return 0;
+	}
+	else
+	{
+		char solve[tamanhoCharr] ;
+		do
+		{
+			fgets(solve, tamanhoCharr, stdin);
+		}while(strlen(solve) == tamanhoCharr);
+		
+		
+	}
+} 
+	 
+int main()
+{
+	char titulo[20];
+	char genero[20];
+	LimparBuffer(titulo, 20);
+	fgets(genero, 20, stdin);
+	
+	printf("%s\n", titulo);
+	printf("%s", genero);
+
+	return 0;
+}
