@@ -6,23 +6,24 @@
 #include <ctype.h>
 #include <time.h>
 
+//typedef
 
 int CalcularDanoDeAtaqueFisico(int atkFisJ, int resFisI, int danoExtraFisJ, int redDanoFisI)
-{ 
+{
   int danoCausado;
   danoCausado = atkFisJ - ((double)atkFisJ/100 * resFisI);
   danoCausado = danoCausado + danoExtraFisJ - redDanoFisI;
-  if (danoCausado < 0) danoCausado = 0;  
-  return danoCausado;  
+  if (danoCausado < 0) danoCausado = 0;
+  return danoCausado;
 }
 
 int CalcularDanoDeAtaqueMagico(int atkMagJ, int resMagI, int danoExtraMagJ, int redDanoMagI)
-{ 
+{
   int danoCausado;
   danoCausado = atkMagJ - ((double)atkMagJ/100 * resMagI);
   danoCausado = danoCausado + danoExtraMagJ - redDanoMagI;
-  if (danoCausado < 0) danoCausado = 0;  
-  return danoCausado;  
+  if (danoCausado < 0) danoCausado = 0;
+  return danoCausado;
 }
 
 int ChamarArea(int area)
@@ -39,18 +40,18 @@ int ChamarArea(int area)
     printf("[3] Cidadela\n");
 
     scanf("%i", &entradaJogador);
-    
+
     do
     {
       switch (entradaJogador)
       {
-        case 1: 
+        case 1:
           areaDeViagem = 4;
           ChamarArea(areaDeViagem);
-        case 2: 
+        case 2:
           areaDeViagem = 2;
           ChamarArea(areaDeViagem);
-        case 3: 
+        case 3:
           areaDeViagem = 3;
           ChamarArea(areaDeViagem);
         default:
@@ -58,7 +59,7 @@ int ChamarArea(int area)
         scanf("%i", &entradaJogador);
       }
     }while(areaDeViagem!=4 && areaDeViagem!=2 && areaDeViagem!=3);
- 
+
   case 2: //Prologo 1-2   //Fonte
     printf("Teste de erro função ChamarArea! (voce está na área 2)(PASSOU).\n");
     printf("Você está na Fonte!\n");
@@ -68,18 +69,18 @@ int ChamarArea(int area)
     printf("[3] Floresta\n");
 
     scanf("%i", &entradaJogador);
-    
+
     do
     {
       switch (entradaJogador)
       {
-        case 1: 
+        case 1:
           areaDeViagem = 1;
           ChamarArea(areaDeViagem);
-        case 2: 
+        case 2:
           areaDeViagem = 3;
           ChamarArea(areaDeViagem);
-        case 3: 
+        case 3:
           areaDeViagem = 4;
           ChamarArea(areaDeViagem);
         default:
@@ -98,18 +99,18 @@ int ChamarArea(int area)
     printf("[3] Fonte\n");
 
     scanf("%i", &entradaJogador);
-    
+
     do
     {
       switch (entradaJogador)
       {
-        case 1: 
+        case 1:
           areaDeViagem = 1;
           ChamarArea(areaDeViagem);
-        case 2: 
+        case 2:
           areaDeViagem = 4;
           ChamarArea(areaDeViagem);
-        case 3: 
+        case 3:
           areaDeViagem = 2;
           ChamarArea(areaDeViagem);
         default:
@@ -133,13 +134,13 @@ int ChamarArea(int area)
     {
       switch (entradaJogador)
       {
-        case 1: 
+        case 1:
           areaDeViagem = 1;
           ChamarArea(areaDeViagem);
-        case 2: 
+        case 2:
           areaDeViagem = 3;
           ChamarArea(areaDeViagem);
-        case 3: 
+        case 3:
           areaDeViagem = 2;
           ChamarArea(areaDeViagem);
         default:
@@ -148,17 +149,18 @@ int ChamarArea(int area)
       }
     }while(areaDeViagem!=1 && areaDeViagem!=3 && areaDeViagem!=2);
 
-  default: 
+  default:
     printf("*Comando inválido, digite o comando desejado novamente.\n");
     ChamarArea(areaDeViagem);
   }
+  return 0;
 }
 
 
 int MelhorarAtributos(int atributosJogador[], int areaAtualJogador)
 {
   int atributoSelecionado=999;
-  /* 
+  /*
   atributosJogador[1] == Vitalidade
   atributosJogador[2] == Força
   atributosJogador[3] == Inteligencia
@@ -224,8 +226,24 @@ int GanharOuro(int levelInimigo, int raridadeInimio, double bonusDeOuroDeItens)
 
 int main()
 {
+FILE *SaveState1;
+FILE *SaveState2;
+FILE *SaveState3;
+
+
+
+
+
+
+
+
 setlocale(LC_ALL, "Portuguese");
+
+
 char nomeJogador[15];
+SaveState1 = fopen("SaveState1.bin", "wb");
+
+
 int atributosJogador[10]={10,10,10,10,10,10,10,10,10,5};
 int vidaAtualJogador = 100;
 int manaAtualJogador = 20;
@@ -236,6 +254,7 @@ int ataqueMagicoAtualJogador = 20;
 int danoFisDeItensAtualJogador = 0;
 int danoMagDeItensAtualJogador = 0;
 
+int StatusJogador[8] = {100,20,5,20,10,20,0,0};
 int vidaJogador = 100;
 int manaJogador = 20;
 int armaduraJogador = 5;
@@ -259,9 +278,25 @@ int experienciaAtualJogador=0;
 int areaDeViagem=0;
 
 inicio:
+printf("Insira seu nome de jogador:");
+scanf("%s", nomeJogador);
+
+
+
+fwrite(nomeJogador, sizeof(char),  15, SaveState1);
+fwrite(atributosJogador, sizeof(int), 8, SaveState1);
+
+fprintf(SaveState1, "%s\n", nomeJogador);
+fprintf(SaveState1, "%i\n", vidaJogador);
+
+//fwrite()
+fclose(SaveState1);
+
 printf("Teste de erro! função Main (PASSOU)\n");
 MelhorarAtributos(atributosJogador, 1);
 ChamarArea(1);
+
+
 
 //srand(time(NULL));
 return 0;
